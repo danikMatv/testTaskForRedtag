@@ -1,15 +1,15 @@
 server:
-  port: 8999
+  port: 5432
 
 spring:
   application:
-    name: redtag
+    name: library
   profiles:
     active:
   datasource:
-    url: jdbc:postgresql://localhost:2000/redtag
-    username: root
-    password: root
+    url: jdbc:postgresql://localhost:5432/library
+    username: postgres
+    password: 123
   jpa:
     hibernate:
       ddl-auto: validate

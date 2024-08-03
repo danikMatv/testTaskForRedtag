@@ -1,6 +1,8 @@
 package org.example.redtag.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,7 +29,9 @@ public class Book {
     private String name;
     private Long year;
     private String description;
-    private String genre;
+
+    @Enumerated(EnumType.STRING)
+    private Genre genre;
 
     @ManyToOne
     @JoinColumn(name = "author_id")
