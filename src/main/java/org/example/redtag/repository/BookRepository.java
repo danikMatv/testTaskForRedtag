@@ -12,4 +12,6 @@ public interface BookRepository extends JpaRepository<Book,Integer> {
 
     @Query(value = "SELECT c FROM Book c")
     List<Book> getAll();
+
+    Book findBookByName(String name);
 }

@@ -28,8 +28,9 @@ public class BookService {
     }
 
     @Transactional
-    public void delete(int id){
-        bookRepository.deleteById(id);
+    public void delete(String name){
+        Book book = bookRepository.findBookByName(name);
+        bookRepository.deleteById(Math.toIntExact(book.getId()));
     }
 
     @Transactional
