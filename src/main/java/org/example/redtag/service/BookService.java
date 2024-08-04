@@ -80,7 +80,7 @@ public class BookService {
         else return books.stream().sorted(Comparator.comparing(Book::getGenre)).toList();
     }
 
-    public List<Book> filterBooksByParam(FilterAuthor filterAuthor, List<Book> allBooks) {
+    public List<Book> filterBooksByParam(FilterAuthor filterAuthor) {
         Author author = authorRepository.findAuthorByFirstNameAndLastName(filterAuthor.getFirstName(), filterAuthor.getLastName());
         return bookRepository.getBooksByAuthor(author);
     }

@@ -20,7 +20,8 @@ public interface BookRepository extends JpaRepository<Book,Integer> {
     @Query(value = "DELETE FROM Book c WHERE c.name = :name")
     void deleteBookByName(@Param("name") String name);
 
-    Book findBookByName(String name);
+    @Query(value = "SELECT c FROM Book c WHERE c.name = :name")
+    Book findBookByName(@Param("name") String name);
 
     List<Book> getBooksByAuthor(Author author);
 }

@@ -60,8 +60,7 @@ public class BookController {
 
     @PostMapping("/search")
     public List<Book> filterBooks(@Valid @RequestBody FilterAuthor filterAuthor){
-        List<Book> allBooks = bookService.getAll();
-        return bookService.filterBooksByParam(filterAuthor,allBooks);
+        return bookService.filterBooksByParam(filterAuthor);
     }
 
 }
