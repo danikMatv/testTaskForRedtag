@@ -37,7 +37,7 @@ public class BookController {
         return bookService.getAll();
     }
 
-    @PostMapping("/add")
+    @PostMapping()
     public Book addNewBook(@Valid @RequestBody AddNewBookRequest newBookRequest){
         return bookService.saveBook(newBookRequest);
     }
@@ -47,7 +47,7 @@ public class BookController {
 
         return bookService.update(Math.toIntExact(id),request);
     }
-    @DeleteMapping("/delete")
+    @DeleteMapping()
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@RequestParam String name) {
         bookService.delete(name);

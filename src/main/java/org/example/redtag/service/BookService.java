@@ -25,6 +25,7 @@ public class BookService {
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
     private final AuthorRepository authorRepository;
+
     public List<Book> getAll(){
         return bookRepository.getAll();
     }
@@ -62,13 +63,9 @@ public class BookService {
 
     private void checkIfBookAlreadyExists(AddNewBookRequest bookRequest) {
         Book checkName = bookRepository.findBookByName(bookRequest.getName());
-        if (checkName != null){
-            throw new BookAlreadyUsedException("book","Book already exist");
+        if (checkName != null) {
+            throw new BookAlreadyUsedException("book", "Book already exist");
         }
     }
 
-    private Book save(AddNewBookRequest bookRequest){
-        Book book = bookMapper.map(bookRequest);
-        return bookRepository.save(book);
-    }
 }

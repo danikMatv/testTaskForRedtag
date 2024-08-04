@@ -21,14 +21,15 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/authors")
 public class AuthorController {
+
     private final AuthorService authorService;
 
-    @PostMapping("/Add")
+    @PostMapping()
     public Author addNewAuthor(@Valid @RequestBody AuthorRequest authorRequest){
         return authorService.saveAuthor(authorRequest);
     }
 
-    @DeleteMapping("/delete")
+    @DeleteMapping()
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@RequestParam String firstName,@RequestParam String lastName){
         authorService.delete(firstName,lastName);

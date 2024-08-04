@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 @RequiredArgsConstructor
 @Getter
-public class BookAlreadyUsedException extends RuntimeException{
+public class BookAlreadyUsedException extends RuntimeException {
 
     private final String bookName;
     private final String message;
