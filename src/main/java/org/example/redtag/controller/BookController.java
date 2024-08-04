@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.redtag.dto.AddNewBookRequest;
 import org.example.redtag.dto.BookResponce;
+import org.example.redtag.dto.FilterAuthor;
 import org.example.redtag.dto.UpdateBookRequest;
 import org.example.redtag.entity.Book;
 import org.example.redtag.service.BookService;
@@ -55,6 +56,12 @@ public class BookController {
     public List<Book> sortBooks(@RequestParam String sortCriteria) {
         List<Book> allBooks = bookService.getAll();
         return bookService.sortBySortType(sortCriteria, allBooks);
+    }
+
+    @PostMapping("/search")
+    public List<Book> filterBooks(@Valid @RequestBody FilterAuthor filterAuthor){
+        List<Book> allBooks = bookService.getAll();
+        return bookService.filterBooksByParam(filterAuthor,allBooks);
     }
 
 }

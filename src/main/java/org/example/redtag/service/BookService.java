@@ -5,6 +5,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.redtag.dto.AddNewBookRequest;
 import org.example.redtag.dto.BookResponce;
+import org.example.redtag.dto.FilterAuthor;
 import org.example.redtag.dto.UpdateBookRequest;
 import org.example.redtag.entity.Author;
 import org.example.redtag.entity.Book;
@@ -79,4 +80,8 @@ public class BookService {
         else return books.stream().sorted(Comparator.comparing(Book::getGenre)).toList();
     }
 
+    public List<Book> filterBooksByParam(FilterAuthor filterAuthor, List<Book> allBooks) {
+        Author author = authorRepository.findAuthorByFirstNameAndLastName(filterAuthor.getFirstName(), filterAuthor.getLastName());
+        return bookRepository.getBooksByAuthor(author);
+    }
 }
