@@ -12,7 +12,6 @@ import org.example.redtag.mapper.BookMapper;
 import org.example.redtag.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,9 +31,12 @@ public class BookService {
     }
 
     @Transactional
-    public void delete(String name){
+    public void delete(String name) {
         Book book = bookRepository.findBookByName(name);
-        bookRepository.deleteById(Math.toIntExact(book.getId()));
+        if (book == null) {
+            throw new BookNotFoundException("Book with name " + name + " not found");
+        }
+        bookRepository.delete(book);
     }
 
     @Transactional
