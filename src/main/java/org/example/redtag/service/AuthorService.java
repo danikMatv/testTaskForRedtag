@@ -2,9 +2,11 @@ package org.example.redtag.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.example.redtag.dto.AuthorRequest;
 import org.example.redtag.entity.Author;
 import org.example.redtag.entity.Book;
 import org.example.redtag.exeption.AuthorNotFoundException;
+import org.example.redtag.mapper.AuthorMapper;
 import org.example.redtag.repository.AuthorRepository;
 import org.example.redtag.repository.BookRepository;
 import org.springframework.stereotype.Service;
@@ -17,10 +19,11 @@ public class AuthorService {
 
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
+    private final AuthorMapper authorMapper;
 
     @Transactional
-    public Author save(Author author){
-        return authorRepository.save(author);
+    public Author saveAuthor(AuthorRequest request){
+        return save(request);
     }
 
     @Transactional
@@ -35,5 +38,9 @@ public class AuthorService {
         authorRepository.delete(author);
     }
 
+    public Author save(AuthorRequest request){
+        Author author = authorMapper.map(request);
+        return authorRepository.save(author);
+    }
 
 }

@@ -28,8 +28,7 @@ public class BookService {
     @Transactional
     public Book saveBook(AddNewBookRequest bookRequest){
         checkIfBookAlreadyExists(bookRequest);
-        Book book = save(bookRequest);
-        return book;
+        return save(bookRequest);
     }
 
     @Transactional
@@ -48,7 +47,7 @@ public class BookService {
 
 
     private void checkIfBookAlreadyExists(AddNewBookRequest bookRequest) {
-        Book checkName = bookRepository.findBookByName(bookRequest.getMame());
+        Book checkName = bookRepository.findBookByName(bookRequest.getName());
         if (checkName != null){
             throw new BookAlreadyUsedException("book","Book already exist");
         }
