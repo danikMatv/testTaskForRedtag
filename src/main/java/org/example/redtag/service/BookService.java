@@ -4,7 +4,6 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.redtag.dto.AddNewBookRequest;
-import org.example.redtag.dto.AuthorRequest;
 import org.example.redtag.dto.BookResponce;
 import org.example.redtag.dto.UpdateBookRequest;
 import org.example.redtag.entity.Author;
@@ -16,6 +15,7 @@ import org.example.redtag.repository.AuthorRepository;
 import org.example.redtag.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -66,6 +66,17 @@ public class BookService {
         if (checkName != null) {
             throw new BookAlreadyUsedException("book", "Book already exist");
         }
+    }
+
+    public List<Book> sortBySortType(String sortType,List<Book> books){
+        if("ABC".equals(sortType)){
+            return books.stream().sorted(Comparator.comparing(book -> book.getAuthor().getFirstName()))
+                    .toList();
+        } else if ("Year".equals(sortType)) {
+            return books.stream().sorted(Comparator.comparing(Book::getYear))
+                    .toList();
+        }
+        else return books.stream().sorted(Comparator.comparing(Book::getGenre)).toList();
     }
 
 }

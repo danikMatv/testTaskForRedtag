@@ -1,7 +1,7 @@
 package org.example.redtag.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -32,6 +32,7 @@ public class Author {
     private String nationality;
 
     @OneToMany(mappedBy = "author",cascade = CascadeType.ALL,orphanRemoval = true)
+    @JsonBackReference
     private List<Book> books;
 
 }

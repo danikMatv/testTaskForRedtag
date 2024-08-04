@@ -1,5 +1,6 @@
 package org.example.redtag.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -36,6 +37,7 @@ public class Book {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
+    @JsonManagedReference
     private Author author;
 
 }

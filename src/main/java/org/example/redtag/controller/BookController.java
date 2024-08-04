@@ -8,7 +8,6 @@ import org.example.redtag.dto.UpdateBookRequest;
 import org.example.redtag.entity.Book;
 import org.example.redtag.service.BookService;
 import org.springframework.http.HttpStatus;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,24 +31,30 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping
-    public List<Book> getAll(Model model){
-        model.addAttribute("library",bookService);
+    public List<Book> getAllBooks() {
         return bookService.getAll();
     }
 
     @PostMapping()
-    public Book addNewBook(@Valid @RequestBody AddNewBookRequest newBookRequest){
+    public Book addNewBook(@Valid @RequestBody AddNewBookRequest newBookRequest) {
         return bookService.saveBook(newBookRequest);
     }
 
     @PutMapping("/{id}")
-    public BookResponce update(@PathVariable Long id, @Valid @RequestBody UpdateBookRequest request){
-
-        return bookService.update(Math.toIntExact(id),request);
+    public BookResponce update(@PathVariable Long id, @Valid @RequestBody UpdateBookRequest request) {
+        return bookService.update(Math.toIntExact(id), request);
     }
+
     @DeleteMapping()
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@RequestParam String name) {
         bookService.delete(name);
     }
+
+    @PostMapping("/list")
+    public List<Book> sortBooks(@RequestParam String sortCriteria) {
+        List<Book> allBooks = bookService.getAll();
+        return bookService.sortBySortType(sortCriteria, allBooks);
+    }
+
 }

@@ -24,14 +24,14 @@ public class AuthorController {
 
     private final AuthorService authorService;
 
-    @PostMapping()
-    public Author addNewAuthor(@Valid @RequestBody AuthorRequest authorRequest){
+    @PostMapping
+    public Author addNewAuthor(@Valid @RequestBody AuthorRequest authorRequest) {
         return authorService.saveAuthor(authorRequest);
     }
 
-    @DeleteMapping()
+    @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@RequestParam String firstName,@RequestParam String lastName){
-        authorService.delete(firstName,lastName);
+    public void deleteAuthor(@RequestParam String firstName, @RequestParam String lastName) {
+        authorService.delete(firstName, lastName);
     }
 }
