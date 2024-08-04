@@ -2,6 +2,7 @@ package org.example.redtag.dto;
 
 import lombok.Builder;
 import lombok.Data;
+import org.example.redtag.entity.Author;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -25,7 +26,7 @@ public class AddNewBookRequest {
     private String description;
 
     @NotNull(message = "Author cannot be empty")
-    private String author;
+    private Author author;
 
     @NotNull(message = "Genre cannot be empty")
     private String genre;

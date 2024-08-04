@@ -28,7 +28,7 @@ public class AuthorService {
 
     @Transactional
     public void delete(String firstName,String lastName){
-        Author author = authorRepository.findAuthorByNameAndSurname(firstName, lastName);
+        Author author = authorRepository.findAuthorByFirstNameAndLastName(firstName, lastName);
         if (author == null) {
             throw new AuthorNotFoundException("Author " + firstName + " " + lastName + " not found ");
         }

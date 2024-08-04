@@ -13,11 +13,11 @@ public class AuthorRequest {
     @NotBlank(message = "Name cannot be empty! ")
     @Pattern(regexp = "[A-Z][a-z]+",
             message = "Must start with a capital letter")
-    private String name;
+    private String firstName;
     @NotBlank(message = "Name cannot be empty! ")
     @Pattern(regexp = "[A-Z][a-z]+",
             message = "Must start with a capital letter")
-    private String surName;
+    private String lastName;
 
     @NotBlank(message = "Year cannot be empty! ")
     private Long age;
