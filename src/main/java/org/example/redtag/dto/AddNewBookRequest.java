@@ -26,7 +26,7 @@ public class AddNewBookRequest {
     private String description;
 
     @NotNull(message = "Author cannot be empty")
-    private Author author;
+    private Long authorId;
 
     @NotNull(message = "Genre cannot be empty")
     private String genre;

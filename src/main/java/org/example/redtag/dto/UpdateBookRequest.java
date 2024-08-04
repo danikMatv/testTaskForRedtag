@@ -10,10 +10,10 @@ import org.hibernate.annotations.processing.Pattern;
 @Builder
 public class UpdateBookRequest {
 
-    private Genre genre;
     private String name;
     private Long year;
     private String description;
     private Author author;
+    private Genre genre;
 
 }

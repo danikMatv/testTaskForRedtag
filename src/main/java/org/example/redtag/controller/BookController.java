@@ -37,12 +37,12 @@ public class BookController {
         return bookService.getAll();
     }
 
-    @PostMapping("/Add")
+    @PostMapping("/add")
     public Book addNewBook(@Valid @RequestBody AddNewBookRequest newBookRequest){
         return bookService.saveBook(newBookRequest);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public BookResponce update(@PathVariable Long id, @Valid @RequestBody UpdateBookRequest request){
 
         return bookService.update(Math.toIntExact(id),request);

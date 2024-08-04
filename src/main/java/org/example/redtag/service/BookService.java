@@ -1,14 +1,18 @@
 package org.example.redtag.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.example.redtag.dto.AddNewBookRequest;
+import org.example.redtag.dto.AuthorRequest;
 import org.example.redtag.dto.BookResponce;
 import org.example.redtag.dto.UpdateBookRequest;
+import org.example.redtag.entity.Author;
 import org.example.redtag.entity.Book;
 import org.example.redtag.exeption.BookAlreadyUsedException;
 import org.example.redtag.exeption.BookNotFoundException;
 import org.example.redtag.mapper.BookMapper;
+import org.example.redtag.repository.AuthorRepository;
 import org.example.redtag.repository.BookRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +24,7 @@ public class BookService {
 
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
+    private final AuthorRepository authorRepository;
     public List<Book> getAll(){
         return bookRepository.getAll();
     }
@@ -27,7 +32,14 @@ public class BookService {
     @Transactional
     public Book saveBook(AddNewBookRequest bookRequest){
         checkIfBookAlreadyExists(bookRequest);
-        return save(bookRequest);
+
+        Author author = authorRepository.findById(Math.toIntExact(bookRequest.getAuthorId()))
+                .orElseThrow(() -> new EntityNotFoundException("Author not found"));
+
+        Book book = bookMapper.map(bookRequest);
+        book.setAuthor(author);
+
+        return bookRepository.save(book);
     }
 
     @Transactional
@@ -36,7 +48,7 @@ public class BookService {
         if (book == null) {
             throw new BookNotFoundException("Book with name " + name + " not found");
         }
-        bookRepository.delete(book);
+        bookRepository.deleteBookByName(name);
     }
 
     @Transactional
